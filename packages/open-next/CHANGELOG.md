@@ -1,5 +1,21 @@
 # open-next
 
+## 4.1.14
+
+### Patch Changes
+
+- [#1208](https://github.com/opennextjs/opennextjs-aws/pull/1208) [`ae169c5`](https://github.com/opennextjs/opennextjs-aws/commit/ae169c5ae68536be093adf9d9913ff69de9cf14c) Thanks [@yuanzhixiang](https://github.com/yuanzhixiang)! - fix: respect `buildOutputPath` when detecting the Next.js bundler (webpack or turbopack)
+
+  Setting `buildOutputPath` to a value other than `.` could fail the build with `Unable to determine Next.js runtime (webpack or turbopack)`.
+
+- [#1328](https://github.com/opennextjs/opennextjs-aws/pull/1328) [`52cc971`](https://github.com/opennextjs/opennextjs-aws/commit/52cc97130fd2a5226c1a11bfec8278d8ce956423) Thanks [@cpruijsen](https://github.com/cpruijsen)! - fix: pass `--cpu` instead of `--arch` and drop `--target` when installing function dependencies
+
+  npm 12 rejects (npm 11 warns) the `--arch` and `--target` flags, so the install failed and, because the error was only logged, the image optimization function deployed without `sharp`. npm filters platform-specific optional dependencies (sharp's `@img/*` packages) by `--cpu`, so `arch` is now passed as `--cpu`. `InstallOptions.nodeVersion` is kept but deprecated and no longer passed to npm.
+
+- [#1317](https://github.com/opennextjs/opennextjs-aws/pull/1317) [`b558c35`](https://github.com/opennextjs/opennextjs-aws/commit/b558c3568803aee8a1cbbb72262f0ce5bf5b1e10) Thanks [@alexdupre](https://github.com/alexdupre)! - fix: report the lifetime of a cache entry to Next.js
+
+  A page rendered on demand by a dynamic route was reported as stale one second after it was written by any instance that did not render it. The `expire` passed by Next.js is now stored with the entry, and `get` reports both `revalidate` and `expire`.
+
 ## 4.1.13
 
 ### Patch Changes
